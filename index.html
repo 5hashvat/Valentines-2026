@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Special Message for You</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-pink: #ff748c;
@@ -14,7 +14,10 @@
         body {
             margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
             min-height: 100vh; background: linear-gradient(135deg, var(--bg-color) 0%, #ffc3a0 100%);
-            font-family: 'Quicksand', sans-serif; overflow-x: hidden; text-align: center;
+            /* Applying Raleway Bold globally */
+            font-family: 'Raleway', sans-serif; 
+            font-weight: 700;
+            overflow-x: hidden; text-align: center;
         }
 
         #game-container {
@@ -23,11 +26,12 @@
             z-index: 10; max-width: 450px; width: 90%; margin: 20px;
         }
 
-        h1 { font-family: 'Pacifico', cursive; color: var(--primary-pink); font-size: 2.2rem; }
+        h1 { color: var(--primary-pink); font-size: 2rem; letter-spacing: -0.5px; }
 
         button {
-            padding: 12px 30px; font-size: 1.1rem; border: none; border-radius: 50px;
-            cursor: pointer; transition: transform 0.2s; font-weight: bold; margin: 10px;
+            padding: 14px 32px; font-size: 1rem; border: none; border-radius: 50px;
+            cursor: pointer; transition: transform 0.2s; font-family: 'Raleway', sans-serif;
+            font-weight: 700; margin: 10px; text-transform: uppercase; letter-spacing: 1px;
         }
 
         #yes-btn { background-color: var(--primary-pink); color: white; }
@@ -35,13 +39,13 @@
 
         .timer { display: flex; justify-content: center; gap: 15px; color: #d63384; margin-top: 10px; }
         .timer-unit { display: flex; flex-direction: column; }
-        .timer-unit span:first-child { font-size: 1.5rem; font-weight: bold; }
+        .timer-unit span:first-child { font-size: 1.5rem; }
 
         .hidden { display: none; }
         
         #secret-text {
             margin-top: 20px; font-style: italic; color: #d63384;
-            display: none; animation: fadeIn 2s;
+            display: none; animation: fadeIn 2s; font-size: 0.9rem;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -55,7 +59,7 @@
     <div id="game-container">
         <div id="ask-section">
             <h1>Will you be my Valentine? ❤️</h1>
-            <p>Counting down the moments...</p>
+            <p>Counting down the moments</p>
             <div id="timer" class="timer">
                 <div class="timer-unit"><span id="days">00</span><span>Days</span></div>
                 <div class="timer-unit"><span id="hours">00</span><span>Hrs</span></div>
@@ -63,16 +67,16 @@
                 <div class="timer-unit"><span id="secs">00</span><span>Secs</span></div>
             </div>
             <div style="margin-top: 20px;">
-                <button id="yes-btn" onclick="showSuccess()">YES!</button>
+                <button id="yes-btn" onclick="showSuccess()">Yes</button>
                 <button id="no-btn" onmouseover="moveButton()" onclick="moveButton()">No</button>
             </div>
         </div>
 
         <div id="success-section" class="hidden">
-            <h1>YAY! 🥰</h1>
-            <p>I love you more than words can say.</p>
+            <h1>Yay 🥰</h1>
+            <p>I love you more than words can say</p>
             <div id="heart-trigger" onclick="checkSecret()" style="font-size: 5rem; cursor: pointer; user-select: none;">💖</div>
-            <p id="secret-hint" style="font-size: 0.7rem; color: #aaa; margin-top: 10px;">(Psst... try tapping the heart 3 times)</p>
+            <p id="secret-hint" style="font-size: 0.7rem; color: #aaa; margin-top: 10px;">(tap the heart 3 times)</p>
             <div id="secret-text">
                 "Distance is just a test to see how far love can travel. <br> I can't wait until we're in the same time zone again."
             </div>
@@ -82,7 +86,6 @@
     <div id="celebration"></div>
 
     <script>
-        // No button logic
         function moveButton() {
             const btn = document.getElementById('no-btn');
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
@@ -90,14 +93,12 @@
             btn.style.position = 'fixed'; btn.style.left = x + 'px'; btn.style.top = y + 'px';
         }
 
-        // Success transition
         function showSuccess() {
             document.getElementById('ask-section').classList.add('hidden');
             document.getElementById('success-section').classList.remove('hidden');
             createHearts();
         }
 
-        // Secret logic
         let clickCount = 0;
         function checkSecret() {
             clickCount++;
@@ -108,7 +109,6 @@
             }
         }
 
-        // Floating hearts
         function createHearts() {
             const container = document.getElementById('celebration');
             for (let i = 0; i < 40; i++) {
@@ -123,7 +123,6 @@
             }
         }
 
-        // Countdown (Target: Feb 14, 2026)
         const targetDate = new Date("February 14, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
