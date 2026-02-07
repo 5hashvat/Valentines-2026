@@ -3,64 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Message for You</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <title>For You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* This * selector forces the font on every single element */
+        * {
+            font-family: 'Raleway', sans-serif !important;
+            font-weight: 700;
+            box-sizing: border-box;
+        }
+
         :root {
             --primary-pink: #ff748c;
             --bg-color: #fff0f3;
         }
 
         body {
-            margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; background: linear-gradient(135deg, var(--bg-color) 0%, #ffc3a0 100%);
-            font-family: 'Raleway', sans-serif; 
-            font-weight: 700;
+            margin: 0; padding: 0; 
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; 
+            background: linear-gradient(135deg, var(--bg-color) 0%, #ffc3a0 100%);
             overflow-x: hidden; text-align: center;
         }
 
         #game-container {
-            background: rgba(255, 255, 255, 0.85); padding: 2.5rem; border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 116, 140, 0.2); backdrop-filter: blur(10px);
-            z-index: 10; max-width: 450px; width: 90%; margin: 20px;
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 3rem 2rem; 
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 116, 140, 0.2); 
+            backdrop-filter: blur(10px);
+            z-index: 10; 
+            max-width: 450px; 
+            width: 90%; 
+            margin: 20px;
         }
 
-        /* Updated heading to match the clean Raleway Bold style */
         h1 { 
             color: var(--primary-pink); 
-            font-size: 2rem; 
-            letter-spacing: -0.5px; 
-            font-family: 'Raleway', sans-serif;
-            font-weight: 700;
-            margin-top: 0;
+            font-size: 2.2rem; 
+            line-height: 1.2;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
         }
 
-        p { font-size: 1rem; color: #555; margin-bottom: 20px; }
+        p { font-size: 1.1rem; color: #555; margin-bottom: 25px; }
 
         button {
-            padding: 14px 32px; font-size: 1rem; border: none; border-radius: 50px;
-            cursor: pointer; transition: transform 0.2s; font-family: 'Raleway', sans-serif;
-            font-weight: 700; margin: 10px; text-transform: uppercase; letter-spacing: 1px;
+            padding: 15px 40px; 
+            font-size: 1.1rem; 
+            border: none; 
+            border-radius: 50px;
+            cursor: pointer; 
+            transition: transform 0.1s; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            margin: 10px;
         }
 
-        #yes-btn { background-color: var(--primary-pink); color: white; }
+        button:active { transform: scale(0.95); } /* Click effect */
+
+        #yes-btn { background-color: var(--primary-pink); color: white; box-shadow: 0 4px 15px rgba(255, 116, 140, 0.4); }
         #no-btn { background-color: #fff; color: #ff748c; border: 2px solid var(--primary-pink); position: relative; }
 
-        .timer { display: flex; justify-content: center; gap: 15px; color: #d63384; margin-top: 10px; }
+        /* Timer Styles */
+        .timer { display: flex; justify-content: center; gap: 15px; color: #d63384; margin-top: 20px; }
         .timer-unit { display: flex; flex-direction: column; }
-        .timer-unit span:first-child { font-size: 1.5rem; }
-        .timer-unit span:last-child { font-size: 0.7rem; text-transform: uppercase; }
+        .timer-unit span:first-child { font-size: 1.8rem; line-height: 1; }
+        .timer-unit span:last-child { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
 
-        .hidden { display: none; }
+        .hidden { display: none !important; }
+        
+        /* Secret Message Styles */
+        #secret-container { margin-top: 20px; }
         
         #secret-text {
-            margin-top: 20px; font-style: italic; color: #d63384;
-            display: none; animation: fadeIn 2s; font-size: 0.9rem;
+            margin-top: 15px; 
+            color: #d63384;
+            display: none; 
+            animation: fadeIn 2s; 
+            font-size: 1rem;
+            line-height: 1.5;
         }
+
+        /* The Heart Button (Invisible Styling) */
+        #heart-btn {
+            background: none;
+            border: none;
+            font-size: 5rem;
+            cursor: pointer;
+            padding: 0;
+            margin: 20px 0 0 0;
+            outline: none;
+            box-shadow: none;
+        }
+        #heart-btn:active { transform: scale(0.85); } /* Big click effect */
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .floating-heart { position: absolute; color: var(--primary-pink); animation: floatUp 4s linear infinite; pointer-events: none; }
+        /* Background Hearts */
+        .floating-heart { position: absolute; color: var(--primary-pink); animation: floatUp 4s linear infinite; pointer-events: none; z-index: 1; }
         @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 1; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
     </style>
 </head>
@@ -70,13 +114,15 @@
         <div id="ask-section">
             <h1>Will you be my Valentine? ❤️</h1>
             <p>Counting down the moments</p>
+            
             <div id="timer" class="timer">
                 <div class="timer-unit"><span id="days">00</span><span>Days</span></div>
                 <div class="timer-unit"><span id="hours">00</span><span>Hrs</span></div>
                 <div class="timer-unit"><span id="mins">00</span><span>Mins</span></div>
                 <div class="timer-unit"><span id="secs">00</span><span>Secs</span></div>
             </div>
-            <div style="margin-top: 20px;">
+
+            <div style="margin-top: 30px;">
                 <button id="yes-btn" onclick="showSuccess()">Yes</button>
                 <button id="no-btn" onmouseover="moveButton()" onclick="moveButton()">No</button>
             </div>
@@ -85,10 +131,13 @@
         <div id="success-section" class="hidden">
             <h1>Yay 🥰</h1>
             <p>I love you more than words can say</p>
-            <div id="heart-trigger" onclick="checkSecret()" style="font-size: 5rem; cursor: pointer; user-select: none;">💖</div>
-            <p id="secret-hint" style="font-size: 0.7rem; color: #aaa; margin-top: 10px;">(tap the heart 3 times)</p>
+            
+            <button id="heart-btn" onclick="checkSecret()">💖</button>
+            
+            <p id="secret-hint" style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">(tap the heart 3 times)</p>
+            
             <div id="secret-text">
-                "Distance is just a test to see how far love can travel. <br> I can't wait until we're in the same time zone again."
+                "Distance is just a test to see how far love can travel.<br>I can't wait until we're in the same time zone again."
             </div>
         </div>
     </div>
@@ -96,29 +145,43 @@
     <div id="celebration"></div>
 
     <script>
+        // 1. No Button Logic
         function moveButton() {
             const btn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.position = 'fixed'; btn.style.left = x + 'px'; btn.style.top = y + 'px';
+            // Reduced area slightly so it doesn't go off-screen
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
         }
 
+        // 2. Show Success Screen
         function showSuccess() {
             document.getElementById('ask-section').classList.add('hidden');
             document.getElementById('success-section').classList.remove('hidden');
             createHearts();
         }
 
+        // 3. Secret Message Logic (Fixed)
         let clickCount = 0;
         function checkSecret() {
             clickCount++;
+            console.log("Heart clicked: " + clickCount); // Check console if unsure
+            
+            // Visual feedback
+            const heartBtn = document.getElementById('heart-btn');
+            heartBtn.style.transform = "scale(0.9)";
+            setTimeout(() => heartBtn.style.transform = "scale(1)", 100);
+
             if (clickCount === 3) {
                 document.getElementById('secret-text').style.display = 'block';
                 document.getElementById('secret-hint').style.display = 'none';
-                document.getElementById('heart-trigger').innerHTML = '💝';
+                document.getElementById('heart-btn').innerHTML = '💝'; // Change emoji
             }
         }
 
+        // 4. Background Hearts
         function createHearts() {
             const container = document.getElementById('celebration');
             for (let i = 0; i < 40; i++) {
@@ -132,3 +195,17 @@
                 }, i * 150);
             }
         }
+
+        // 5. Countdown Timer
+        const targetDate = new Date("February 14, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const d = targetDate - now;
+            document.getElementById("days").innerHTML = Math.max(0, Math.floor(d / (1000*60*60*24)));
+            document.getElementById("hours").innerHTML = Math.max(0, Math.floor((d % (1000*60*60*24)) / (1000*60*60)));
+            document.getElementById("mins").innerHTML = Math.max(0, Math.floor((d % (1000*60*60)) / (1000*60)));
+            document.getElementById("secs").innerHTML = Math.max(0, Math.floor((d % (1000*60)) / 1000));
+        }, 1000);
+    </script>
+</body>
+</html>
