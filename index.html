@@ -14,7 +14,6 @@
         body {
             margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
             min-height: 100vh; background: linear-gradient(135deg, var(--bg-color) 0%, #ffc3a0 100%);
-            /* Applying Raleway Bold globally */
             font-family: 'Raleway', sans-serif; 
             font-weight: 700;
             overflow-x: hidden; text-align: center;
@@ -26,7 +25,17 @@
             z-index: 10; max-width: 450px; width: 90%; margin: 20px;
         }
 
-        h1 { color: var(--primary-pink); font-size: 2rem; letter-spacing: -0.5px; }
+        /* Updated heading to match the clean Raleway Bold style */
+        h1 { 
+            color: var(--primary-pink); 
+            font-size: 2rem; 
+            letter-spacing: -0.5px; 
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            margin-top: 0;
+        }
+
+        p { font-size: 1rem; color: #555; margin-bottom: 20px; }
 
         button {
             padding: 14px 32px; font-size: 1rem; border: none; border-radius: 50px;
@@ -40,6 +49,7 @@
         .timer { display: flex; justify-content: center; gap: 15px; color: #d63384; margin-top: 10px; }
         .timer-unit { display: flex; flex-direction: column; }
         .timer-unit span:first-child { font-size: 1.5rem; }
+        .timer-unit span:last-child { font-size: 0.7rem; text-transform: uppercase; }
 
         .hidden { display: none; }
         
@@ -50,7 +60,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .floating-heart { position: absolute; color: var(--primary-pink); animation: floatUp 4s linear infinite; }
+        .floating-heart { position: absolute; color: var(--primary-pink); animation: floatUp 4s linear infinite; pointer-events: none; }
         @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 1; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
     </style>
 </head>
@@ -122,16 +132,3 @@
                 }, i * 150);
             }
         }
-
-        const targetDate = new Date("February 14, 2026 00:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = targetDate - now;
-            document.getElementById("days").innerHTML = Math.floor(d / (1000*60*60*24));
-            document.getElementById("hours").innerHTML = Math.floor((d % (1000*60*60*24)) / (1000*60*60));
-            document.getElementById("mins").innerHTML = Math.floor((d % (1000*60*60)) / (1000*60));
-            document.getElementById("secs").innerHTML = Math.floor((d % (1000*60)) / 1000);
-        }, 1000);
-    </script>
-</body>
-</html>
